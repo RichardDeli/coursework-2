@@ -105,4 +105,11 @@ connectToDb()
     }
   });
   
+  app.put("/lessons/:id", (req, res) => {
+    const lessonId = req.params.id;
+    const spaces = req.body.spaces;
   
+    updateLesson(lessonId, spaces);
+  
+    res.send("Lesson updated successfully");
+  });
