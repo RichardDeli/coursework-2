@@ -32,3 +32,4 @@ const getDb = () => {
 }
 )
 
+app.use(express.static("public"));
