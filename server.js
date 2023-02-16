@@ -38,3 +38,52 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 
 app.use(cors())
+  
+connectToDb()
+    .then(() => {
+      app.listen(process.env.PORT, () =>
+        console.log(`Server is running on port ${process.env.PORT}`)
+      );
+    })
+    .catch((err) => {
+      console.log("Error starting server: ", err);
+    });
+  
+  const updateLesson = (lessonId, spaces) => {
+    const db = getDb();
+    const collection = db.collection("lesson");
+  
+    collection.findOneAndUpdate(
+      { _id: ObjectId(lessonId) },
+      { $inc: { spaces: -spaces } },
+      (err, result) => {
+        if (err) throw err;
+      }
+    );
+  };
+  
+  app.get("/lessons", async (req, res, next) => {
+    try {
+      const searchText = req.query.search
+      let query = {}
+  
+      if (searchText) {
+        query = {
+          $or: [
+            { subject: { $regex: searchText, $options: 'i' } },
+            { location: { $regex: searchText, $options: 'i' } }
+          ]
+        }
+      }
+  
+      const db = getDb();
+      const collection = db.collection("lesson");
+      const items = await collection.find(query).toArray();
+      
+      res.send(items);
+    } catch (err) {
+      next(err);
+    }
+  });
+  
+ 
