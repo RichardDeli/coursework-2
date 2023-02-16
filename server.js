@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const { ObjectId } = require("mongodb");
 const { connectToDb, getDb } = require("./db");
 const logger = require("./logger");
+const cors = require('cors')
 
 let connection;
 
@@ -35,3 +36,5 @@ const getDb = () => {
 app.use(express.static("public"));
 
 app.use(bodyParser.json());
+
+app.use(cors())
