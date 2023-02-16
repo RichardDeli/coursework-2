@@ -86,4 +86,23 @@ connectToDb()
     }
   });
   
- 
+  app.post("/orders", async (req, res, next) => {
+    try {
+      const order = req.body;
+  
+      const db = getDb();
+      const collection = db.collection("order");
+  
+      collection.insertOne(order, (err, result) => {
+        if (err) throw err;
+  
+        // updateLesson(order.lesson_id, order.spaces);
+  
+        res.json(result);
+      });
+    } catch (err) {
+      next(err);
+    }
+  });
+  
+  
