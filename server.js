@@ -21,4 +21,14 @@ const getDb = () => {
     return connection.db('coursework');
   };
 
-  
+  app.use((req, res, next) => {
+    console.log({
+        method: req.method,
+        url: req.url,
+        status: res.statusCode
+    });
+
+    next();
+}
+)
+
