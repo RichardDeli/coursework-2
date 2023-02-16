@@ -33,3 +33,5 @@ const getDb = () => {
 )
 
 app.use(express.static("public"));
+
+app.use(bodyParser.json());
