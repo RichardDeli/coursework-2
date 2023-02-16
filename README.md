@@ -4,3 +4,5 @@ Github Pages Link for Vue App: https://github.com/RichardDeli/coursework-1.githu
 
 Github Repository for Express App: https://github.com/Freeman-md/individual-coursework-2
 
+AWS Url for Lesons: https://richard-coursework-2-env.eba-czkbpakb.eu-west-2.elasticbeanstalk.com/lessons
+
